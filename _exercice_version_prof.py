@@ -1,46 +1,41 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import string
 
 
 def is_even_len(string: str) -> bool:
-    longueur=len(string)
-    isEven= longueur%2==0
-    return isEven
+    return len(string) % 2 == 0
 
 
 def remove_third_char(string: str) -> str:
-    newStr=""
-    for i in range(len(string)):
-        if i!=2:
-            newStr=newStr+string[i]
-
-    return newStr
+    return string[:2] + string[3:]
 
 
 def replace_char(string: str, old_char: str, new_char: str) -> str:
-    newString=""
     for i in range(len(string)):
-        if string[i]!= old_char:
-            newString=newString + string[i]
-        else:
-            newString = newString + new_char
+        if string[i] == old_char:
+            string = string[:i] + new_char + string[i + 1:]
 
-    return newString
+    return string
 
 
 def get_number_of_char(string: str, char: str) -> int:
-    nombreOccurence=0
+    number_of_char = 0
+    for c in string:
+        if c == char:
+            number_of_char += 1
 
-    for i in range(len(string)):
-        if string[i] == char:
-            nombreOccurence+=1
-
-    return nombreOccurence
+    return number_of_char
 
 
 def get_number_of_words(sentence: str, word: str) -> int:
-    compte = sentence.count(word)
-    return compte
+    words = sentence.split()
+    number_of_word = 0
+    for w in words:
+        if w == word:
+            number_of_word += 1
+
+    return number_of_word
 
 
 def main() -> None:
@@ -57,7 +52,7 @@ def main() -> None:
     print(
         f"On remplace le caratère w par le caractère z dans la chaine: {chaine}. Résultat : {replace_char(chaine, 'w', 'z')}")
 
-    print(f"Le nombre d'occurrence de l dans {chaine} est : {get_number_of_char(chaine, 'l')}")
+    print(f"Le nombre d'occurrence de l dans hello est : {get_number_of_char(chaine, 'l')}")
 
     chaine = "Baby shark doo doo doo doo doo doo"
     print(f"L'occurence du mot doo dans la chaine {chaine} est: {get_number_of_words(chaine, 'doo')}")
@@ -65,3 +60,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
